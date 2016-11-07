@@ -2,6 +2,9 @@ FROM python:3.5.2
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+RUN apt-get update && apt-get install --fix-missing -y \
+    libsasl2-modules \
+    locales
 
 RUN echo "America/Sao_Paulo" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
 RUN echo 'pt_BR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
